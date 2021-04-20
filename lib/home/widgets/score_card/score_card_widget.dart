@@ -13,26 +13,29 @@ class ScoreCardWidget extends StatelessWidget {
           color: AppColors.white,
           borderRadius: BorderRadius.circular(15),
         ),
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: ChartWidget(),
-            ),
-            Expanded(
-              flex: 1,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text("Vamos começar", style: AppTextStyles.heading),
-                  Text("Complete os desafios e avance em conhecimento",
-                      style: AppTextStyles.body)
-                ],
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(right: 16),
+                child: ChartWidget(),
               ),
-            )
-          ],
+              Expanded(
+                flex: 1,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text("Vamos começar", style: AppTextStyles.heading),
+                    Text("Complete os desafios e avance em conhecimento",
+                        style: AppTextStyles.body)
+                  ],
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );
