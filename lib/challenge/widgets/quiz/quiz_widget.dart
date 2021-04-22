@@ -10,34 +10,78 @@ class QuizWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 20),
+      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
       child: Column(
         children: [
           Text(title, style: AppTextStyles.heading),
           SizedBox(height: 24),
-          Column(
-            children: [
-              AnswerWidget(
-                isSelected: false,
-                isRight: false,
-                title:
-                    "Possibilidade a criação de APPs nativos para qualquer plataforma",
-              ),
-              SizedBox(height: 8),
-              AnswerWidget(
-                isSelected: true,
-                isRight: false,
-                title:
-                    "Possibilidade a criação de APPs nativos para qualquer plataforma",
-              ),
-              SizedBox(height: 8),
-              AnswerWidget(
-                isSelected: true,
-                isRight: true,
-                title:
-                    "Possibilidade a criação de APPs nativos para qualquer plataforma",
-              ),
-            ],
+          Expanded(
+            child: ListView(
+              children: [
+                AnswerWidget(
+                  isSelected: false,
+                  isRight: false,
+                  title:
+                      "Possibilidade a criação de APPs nativos para qualquer plataforma, seja ela Web, Mobile ou Desktop!",
+                ),
+                SizedBox(height: 8),
+                AnswerWidget(
+                  isSelected: true,
+                  isRight: false,
+                  title:
+                      "Possibilidade a criação de APPs nativos para qualquer plataforma, seja ela Web, Mobile ou Desktop!",
+                ),
+                SizedBox(height: 8),
+                AnswerWidget(
+                  isSelected: true,
+                  isRight: true,
+                  title:
+                      "Possibilidade a criação de APPs nativos para qualquer plataforma, seja ela Web, Mobile ou Desktop!",
+                ),
+                SizedBox(height: 8),
+                AnswerWidget(
+                  isSelected: true,
+                  isRight: true,
+                  title:
+                      "Possibilidade a criação de APPs nativos para qualquer plataforma, seja ela Web, Mobile ou Desktop!",
+                ),
+                SizedBox(height: 8),
+                AnswerWidget(
+                  isSelected: true,
+                  isRight: true,
+                  title:
+                      "Possibilidade a criação de APPs nativos para qualquer plataforma, seja ela Web, Mobile ou Desktop!",
+                ),
+                SizedBox(height: 8),
+                AnswerWidget(
+                  isSelected: true,
+                  isRight: true,
+                  title:
+                      "Possibilidade a criação de APPs nativos para qualquer plataforma, seja ela Web, Mobile ou Desktop!",
+                ),
+                SizedBox(height: 8),
+                AnswerWidget(
+                  isSelected: true,
+                  isRight: true,
+                  title:
+                      "Possibilidade a criação de APPs nativos para qualquer plataforma, seja ela Web, Mobile ou Desktop!",
+                ),
+                SizedBox(height: 8),
+                AnswerWidget(
+                  isSelected: true,
+                  isRight: true,
+                  title:
+                      "Possibilidade a criação de APPs nativos para qualquer plataforma, seja ela Web, Mobile ou Desktop!",
+                ),
+                SizedBox(height: 8),
+                AnswerWidget(
+                  isSelected: true,
+                  isRight: true,
+                  title:
+                      "Possibilidade a criação de APPs nativos para qualquer plataforma, seja ela Web, Mobile ou Desktop!",
+                ),
+              ],
+            ),
           ),
         ],
       ),

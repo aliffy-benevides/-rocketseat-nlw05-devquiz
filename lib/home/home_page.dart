@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:quizdev/core/core.dart';
+
+import 'home_controller.dart';
+import 'package:quizdev/home/home_state.dart';
 import 'package:quizdev/home/widgets/app_bar/app_bar_widget.dart';
 import 'package:quizdev/home/widgets/level_button/level_button_widget.dart';
 import 'package:quizdev/home/widgets/quiz_card/quiz_card_widget.dart';
+
 
 class HomePage extends StatefulWidget {
   HomePage({Key? key}) : super(key: key);
@@ -11,10 +16,32 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  final controller = HomeController();
+
+  @override
+  void initState() {
+    super.initState();
+    controller.getAll();
+
+    controller.stateNotifier.addListener(() {
+      setState((){});
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
+    if (controller.state != HomeState.success) {
+      return Scaffold(
+        body: Center(
+          child: CircularProgressIndicator(
+            valueColor: AlwaysStoppedAnimation<Color>(AppColors.darkGreen),
+          ),
+        ),
+      );
+    }
+
     return Scaffold(
-      appBar: AppBarWidget(),
+      appBar: AppBarWidget(controller.user!),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
         child: Column(
@@ -34,12 +61,13 @@ class _HomePageState extends State<HomePage> {
                 crossAxisCount: 2,
                 mainAxisSpacing: 8,
                 crossAxisSpacing: 8,
-                children: [
-                  QuizCardWidget(),
-                  QuizCardWidget(),
-                  QuizCardWidget(),
-                  QuizCardWidget(),
-                ],
+                children: controller.quizzes!
+                    .map((e) => QuizCardWidget(
+                          title: e.title,
+                          totalAnsweredQuestions: e.questionAnswered,
+                          totalQuestions: e.questions.length,
+                        ))
+                    .toList(),
               ),
             ),
           ],

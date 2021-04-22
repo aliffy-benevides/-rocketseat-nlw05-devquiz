@@ -3,6 +3,17 @@ import 'package:quizdev/core/core.dart';
 import 'package:quizdev/shared/widgets/progress_indicator/progress_indicator_widget.dart';
 
 class QuizCardWidget extends StatelessWidget {
+  final String title;
+  final int totalAnsweredQuestions;
+  final int totalQuestions;
+
+  const QuizCardWidget({
+    Key? key,
+    required this.title,
+    required this.totalAnsweredQuestions,
+    required this.totalQuestions,
+  }) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -22,15 +33,15 @@ class QuizCardWidget extends StatelessWidget {
             child: Image.asset(AppImages.blocks),
           ),
           SizedBox(height: 8), // Min Space
-          Text("Gerenciamento de Estado", style: AppTextStyles.heading15),
+          Text(title, style: AppTextStyles.heading15),
           SizedBox(height: 8), // Min Space
           Row(
             children: [
-              Text("3 de 10", style: AppTextStyles.body11),
+              Text("$totalAnsweredQuestions de $totalQuestions", style: AppTextStyles.body11),
               SizedBox(width: 16),
               Expanded(
                 flex: 1,
-                child: ProgressIndicatorWidget(value: 0.3),
+                child: ProgressIndicatorWidget(value: (totalAnsweredQuestions / totalQuestions)),
               ),
             ],
           )
