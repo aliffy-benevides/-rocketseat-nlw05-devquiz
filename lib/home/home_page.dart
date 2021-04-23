@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:quizdev/challenge/challenge_page.dart';
 import 'package:quizdev/core/core.dart';
 
 import 'home_controller.dart';
@@ -66,6 +67,9 @@ class _HomePageState extends State<HomePage> {
                           title: e.title,
                           totalAnsweredQuestions: e.questionAnswered,
                           totalQuestions: e.questions.length,
+                          onTap: () {
+                            Navigator.push(context, MaterialPageRoute(builder: (context) => ChallengePage(questions: e.questions)));
+                          },
                         ))
                     .toList(),
               ),

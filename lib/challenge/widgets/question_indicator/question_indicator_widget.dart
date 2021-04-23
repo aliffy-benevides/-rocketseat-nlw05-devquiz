@@ -4,6 +4,11 @@ import 'package:quizdev/core/core.dart';
 import 'package:quizdev/shared/widgets/progress_indicator/progress_indicator_widget.dart';
 
 class QuestionIndicatorWidget extends StatelessWidget {
+  final int questionsAnswered;
+  final int length;
+
+  const QuestionIndicatorWidget({Key? key, required this.questionsAnswered, required this.length}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -12,12 +17,12 @@ class QuestionIndicatorWidget extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text("Questão 04", style: AppTextStyles.body),
-            Text("de 10", style: AppTextStyles.body),
+            Text("Questão $questionsAnswered", style: AppTextStyles.body),
+            Text("de $length", style: AppTextStyles.body),
           ],
         ),
         SizedBox(height: 16),
-        ProgressIndicatorWidget(value: 0.4)
+        ProgressIndicatorWidget(value: questionsAnswered/length)
       ]),
     );
   }
