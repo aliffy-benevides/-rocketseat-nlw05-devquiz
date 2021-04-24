@@ -9,4 +9,6 @@ class ChallengeController {
 
   bool get isQuestionAnswered => isQuestionAnsweredNotifier.value;
   set isQuestionAnswered(bool value) => isQuestionAnsweredNotifier.value = value;
+
+  int correctAnswers = 0;
 }

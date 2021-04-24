@@ -4,13 +4,15 @@ import 'package:quizdev/challenge/challenge_controller.dart';
 import 'package:quizdev/challenge/widgets/next_button/next_button_widget.dart';
 import 'package:quizdev/challenge/widgets/question_indicator/question_indicator_widget.dart';
 import 'package:quizdev/challenge/widgets/quiz/quiz_widget.dart';
-import 'package:quizdev/home/home_page.dart';
+import 'package:quizdev/result/result_page.dart';
 import 'package:quizdev/shared/models/question_model.dart';
 
 class ChallengePage extends StatefulWidget {
   final List<QuestionModel> questions;
+  final String title;
 
-  const ChallengePage({Key? key, required this.questions}) : super(key: key);
+  const ChallengePage({Key? key, required this.questions, required this.title})
+      : super(key: key);
 
   @override
   _ChallengePageState createState() => _ChallengePageState();
@@ -28,20 +30,37 @@ class _ChallengePageState extends State<ChallengePage> {
     super.initState();
   }
 
-  void nextPage() {
+  void nextPage(context) {
     if (controller.currentPage < widget.questions.length - 1) {
       pageController.nextPage(
         duration: Duration(milliseconds: 500),
         curve: Curves.linear,
       );
     } else {
-      Navigator.pop(context);
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => ResultPage(
+            title: widget.title,
+            length: widget.questions.length,
+            result: controller.correctAnswers,
+          ),
+        ),
+      );
     }
   }
 
-  void confirmAnswer() {
+  void confirmAnswer(context) {
     controller.isQuestionAnswered = false;
-    nextPage();
+    nextPage(context);
+  }
+
+  void onAnswered(bool isRight) {
+    controller.isQuestionAnswered = true;
+
+    if (isRight) {
+      controller.correctAnswers++;
+    }
   }
 
   @override
@@ -86,9 +105,7 @@ class _ChallengePageState extends State<ChallengePage> {
         children: widget.questions
             .map((e) => QuizWidget(
                   question: e,
-                  onAnswered: () {
-                    controller.isQuestionAnswered = true;
-                  },
+                  onAnswered: onAnswered,
                 ))
             .toList(),
       ),
@@ -104,12 +121,16 @@ class _ChallengePageState extends State<ChallengePage> {
                 Expanded(
                   child: isAnswered
                       ? NextButtonWidget.disabled("Pular", () {})
-                      : NextButtonWidget.white("Pular", nextPage),
+                      : NextButtonWidget.white("Pular", () {
+                          nextPage(context);
+                        }),
                 ),
                 SizedBox(width: 7),
                 Expanded(
                   child: isAnswered
-                      ? NextButtonWidget.green("Confirmar", confirmAnswer)
+                      ? NextButtonWidget.green("Confirmar", () {
+                          confirmAnswer(context);
+                        })
                       : NextButtonWidget.disabled("Confirmar", () {}),
                 ),
               ],

@@ -8,7 +8,6 @@ import 'package:quizdev/home/widgets/app_bar/app_bar_widget.dart';
 import 'package:quizdev/home/widgets/level_button/level_button_widget.dart';
 import 'package:quizdev/home/widgets/quiz_card/quiz_card_widget.dart';
 
-
 class HomePage extends StatefulWidget {
   HomePage({Key? key}) : super(key: key);
 
@@ -25,7 +24,7 @@ class _HomePageState extends State<HomePage> {
     controller.getAll();
 
     controller.stateNotifier.addListener(() {
-      setState((){});
+      setState(() {});
     });
   }
 
@@ -68,7 +67,15 @@ class _HomePageState extends State<HomePage> {
                           totalAnsweredQuestions: e.questionAnswered,
                           totalQuestions: e.questions.length,
                           onTap: () {
-                            Navigator.push(context, MaterialPageRoute(builder: (context) => ChallengePage(questions: e.questions)));
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => ChallengePage(
+                                  questions: e.questions,
+                                  title: e.title,
+                                ),
+                              ),
+                            );
                           },
                         ))
                     .toList(),

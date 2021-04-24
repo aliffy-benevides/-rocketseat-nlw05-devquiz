@@ -3,6 +3,10 @@ import 'package:quizdev/core/core.dart';
 import 'package:quizdev/home/widgets/chart/chart_widget.dart';
 
 class ScoreCardWidget extends StatelessWidget {
+  final double percent;
+
+  const ScoreCardWidget({Key? key, required this.percent}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -20,7 +24,7 @@ class ScoreCardWidget extends StatelessWidget {
             children: [
               Padding(
                 padding: const EdgeInsets.only(right: 16),
-                child: ChartWidget(),
+                child: ChartWidget(percent: percent),
               ),
               Expanded(
                 flex: 1,
